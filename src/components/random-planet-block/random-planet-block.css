@@ -1,18 +1,25 @@
-.random-planet-block{
-
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.size{
-    height: 150px;
-    width: 150px;
+.random-planet-block {
+    width: 100%;
+    align-self: start;
+}
+
+.size {
+    height: 160px;
+    width: 160px;
     margin-right: 20px;
     margin-left: 20px;
 }
 
-.detail{
+.detail {
     width: 400px;
 }
 
-.term{
+.term {
     margin-right: 15px;
 }

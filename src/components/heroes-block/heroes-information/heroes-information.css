@@ -1,0 +1,19 @@
+.wrapper {
+  width: 800px;
+  height: 100%;
+}
+
+.size {
+  height: 600px;
+  width: 160px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.detail {
+  width: 200px;
+}
+
+.term {
+  margin-right: 15px;
+}

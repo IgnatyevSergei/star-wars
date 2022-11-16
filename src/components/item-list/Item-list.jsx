@@ -6,6 +6,10 @@ import Error from "../error";
 class ItemList extends Component {
     services = new servicesApi()
 
+    constructor(props) {
+        super(props);
+    }
+
     state = {
         peopleList: null,
         hasError: false
@@ -21,7 +25,9 @@ class ItemList extends Component {
     }
 
     renderItems(peopleList) {
-        return peopleList.map(({id, name}) => (<li className='list-group-item' key={id}>
+        return peopleList.map(({id, name}) => (<li onClick={()=>{
+            this.props.getPersonId({id})
+        }} className='list-group-item' key={id}>
             {name}
         </li>))
     }

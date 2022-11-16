@@ -3,21 +3,24 @@ import PersonDetalis from "../person-detalis";
 import ItemList from "../item-list";
 
 class PeoplePage extends Component {
-    constructor(props) {
-        super(props);
-        this.id = this.props.id
+   state = {
+       personId: null
+   }
 
-        console.log(this.props)
-    }
+   getPersonId =(id)=>{
+       this.setState({
+           personId: id
+       })
+   }
 
     render() {
           return (
             <div className='row mb2'>
                 <div className='col-md-6'>
-                    <ItemList id = {this.id} />
+                    <ItemList getPersonId={this.getPersonId} />
                 </div>
                 <div className='col-md-6'>
-                    <PersonDetalis/>
+                    <PersonDetalis selectedItem={this.state}/>
                 </div>
             </div>
         );

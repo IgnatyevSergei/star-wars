@@ -2,7 +2,9 @@ class ServicesApi {
 
     _apiBasePath = 'https://swapi.dev/api'
 
-    async getResource(url) {
+    _imageBasePath = `https://starwars-visualguide.com/assets/img`
+
+     getResource = async (url) => {
         const response = await fetch(`${this._apiBasePath}${url}`)
 
         if (!response.ok) {
@@ -13,49 +15,59 @@ class ServicesApi {
 
     }
 
-    async getAllPlanets() {
+     getAllPlanets = async () => {
         const response = await this.getResource('/planets/')
-        return await response.results
+        return await response.results.map(this._transformPlanetData)
     }
 
-    async getPlanet(id) {
+     getPlanet = async (id) => {
         const response = await this.getResource(`/planets/${id}`)
 
         return this._transformPlanetData(response)
     }
 
-    async getAllPeople() {
+     getAllPeople= async () => {
         const response = await this.getResource('/people/')
-        return await response.results.map( this._transformPersonData)
+        return await response.results.map(this._transformPersonData)
     }
 
-    async getPerson(id) {
+     getPerson = async (id) => {
         const response = await this.getResource(`/people/${id}`)
-        return await response
+        return this._transformPersonData(response)
 
 
     }
 
-    async getAllStarships() {
+     getAllStarships = async () => {
         const response = await this.getResource('/starships/')
-        return await response.results
+        return await response.results.map(this._transformStarshipData)
 
 
     }
 
-    async getStarships(id) {
+     getStarships = async (id) => {
         const response = await this.getResource(`/starships/${id}`)
-        return await response
+        return this._transformStarshipData(response)
 
 
+    }
+
+    getPersonImage = ({id}) => {
+        return `${this._imageBasePath}/characters/${id}.jpg`
+    }
+    getPlanetImage = ({id}) => {
+        return `${this._imageBasePath}/planets/${id}.jpg`
+    }
+    getStarshipsImage = ({id}) => {
+        return `${this._imageBasePath}/starships/${id}.jpg`
     }
 
     _extract(url) {
-        const regExp = /\/([0-9])*\/$/
+        const regExp = /\/([0-9]*)\/$/
         return url.match(regExp)[1]
     }
 
-    _transformPlanetData(response) {
+    _transformPlanetData = (response) => {
         return {
             id: this._extract(response.url),
             name: response.name,
@@ -66,7 +78,7 @@ class ServicesApi {
         }
     }
 
-    _transformPersonData=(person)=> {
+    _transformPersonData = (person) => {
         return {
             id: this._extract(person.url),
             name: person.name,
@@ -77,6 +89,25 @@ class ServicesApi {
 
         }
     }
+
+    _transformStarshipData = (starship) => {
+        return {
+            id: this._extract(starship.url),
+            name: starship.name,
+            model: starship.model,
+            length: starship.length,
+            crew: starship.crew,
+            passengers: starship.passengers,
+            costInCredits: starship.cost_in_credits,
+
+
+
+        }
+    }
+
+
+
+
 
 
 }

@@ -1,35 +1,36 @@
 import React, {Component} from 'react';
-import servicesApi from "../../services-api/services-api";
 import Spiner from "../spiner";
 import Error from "../error";
 
 class ItemList extends Component {
-    services = new servicesApi()
 
-    constructor(props) {
-        super(props);
-    }
+
 
     state = {
-        peopleList: null,
+        itemList: null,
         hasError: false
     }
 
     componentDidMount() {
-        this.services.getAllPeople()
-            .then(peopleList => {
+        const {getData} = this.props
+
+
+        getData()
+            .then(itemList => {
                 this.setState({
-                    peopleList
+                    itemList
                 })
             })
     }
 
-    renderItems(peopleList) {
-        return peopleList.map(({id, name}) => (<li onClick={()=>{
-            this.props.getPersonId({id})
-        }} className='list-group-item' key={id}>
-            {name}
-        </li>))
+    renderItems(itemList) {
+        return itemList.map((item) => {
+            const label = this.props.renderList(item)
+            return (<li onClick={()=>{
+            this.props.getPersonId(item.id)
+        }} className='list-group-item' key={item.id}>
+            {label}
+        </li>)})
     }
 
     static getDerivedStateFromError(error) {
@@ -41,9 +42,9 @@ class ItemList extends Component {
     }
 
     render() {
-        const {peopleList, hasError} = this.state
+        const {itemList, hasError} = this.state
 
-        if (!peopleList) {
+        if (!itemList) {
             return <Spiner/>
         }
 
@@ -51,7 +52,7 @@ class ItemList extends Component {
             return <Error/>
         }
 
-        const items = this.renderItems(peopleList)
+        const items = this.renderItems(itemList)
 
 
         return (

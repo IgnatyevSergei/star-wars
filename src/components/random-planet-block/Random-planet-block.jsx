@@ -15,7 +15,7 @@ class RandomPlanetBlock extends React.Component {
 
     componentDidMount() {
         this.fetchPlanet()
-        this.intervalId = setInterval(this.fetchPlanet, 5000)
+        // this.intervalId = setInterval(this.fetchPlanet, 5000)
     }
 
     componentWillUnmount() {

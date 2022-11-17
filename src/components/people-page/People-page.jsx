@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import PersonDetalis from "../person-detalis";
 import ItemList from "../item-list";
+import ServicesApi from "../../services-api";
 
 class PeoplePage extends Component {
+    services = new ServicesApi()
+
    state = {
        personId: null
    }
@@ -13,14 +16,18 @@ class PeoplePage extends Component {
        })
    }
 
+
+
     render() {
           return (
             <div className='row mb2'>
                 <div className='col-md-6'>
-                    <ItemList getPersonId={this.getPersonId} />
+                    <ItemList getPersonId={this.getPersonId}
+                    getData={this.services.getAllPeople}
+                    renderList={(item)=> `${item.name}` }/>
                 </div>
                 <div className='col-md-6'>
-                    <PersonDetalis selectedItem={this.state}/>
+                    <PersonDetalis selectedItem={this.state.personId}/>
                 </div>
             </div>
         );

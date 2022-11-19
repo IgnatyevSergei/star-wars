@@ -1,0 +1,14 @@
+.detail {
+    width: 400px;
+}
+
+.term {
+    margin-right: 15px;
+}
+
+.size {
+    height: 200px;
+    width: 200px;
+    margin-right: 20px;
+    margin-left: 20px;
+}

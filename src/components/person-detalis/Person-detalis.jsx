@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import servicesApi from "../../services-api";
+import './person-detalis.css'
+
 
 class PersonDetails extends Component {
-    services = new servicesApi()
+
 
     state ={
         item: null,
@@ -21,14 +22,29 @@ class PersonDetails extends Component {
 
 
     updateItem () {
-        const {selectedItem} = this.props
+        const {selectedItem, getData, getImage} = this.props
+
         if(!selectedItem) return
-        this.services.getPerson(selectedItem)
+        getData(selectedItem)
             .then(item => {
                 this.setState({
                     item,
-                    image: this.services.getPersonImage(item)})
+                    image: getImage(item)})
+
             })
+    }
+
+    renderItem (item) {
+       return  Object.entries(item).map(([title, description]) =>{
+           return (<li className='list-group-item' key={item.id}>
+                        <span className='term'>{title}:</span>
+                       <span className='term'>{description}</span>
+                     </li>
+
+            )
+        })
+
+
     }
 
 
@@ -41,27 +57,23 @@ class PersonDetails extends Component {
             return <span> выберите элемент</span>
         }
 
-        const {name, gender, birthYear, eyeColor} = this.state.item
+        const {name} = this.state.item
+
+        const itemIfo =  this.renderItem(item)
+
+        console.log(itemIfo)
+
+
+
 
 
 
           return (
             <div>
-                <img  className="img-thumbnail float-start" src={image} alt=""/>
+                <img  className="img-thumbnail float-start size" src={image} alt=""/>
                 <h4>{name}</h4>
                 <ul className='list-group list-group-flush detail'>
-                    <li className='list-group-item'>
-                        <span className='term'>Gender:</span>
-                        <span className='term'>{gender}</span>
-                    </li>
-                    <li className='list-group-item'>
-                        <span className='term'>Berth Day:</span>
-                        <span className='term'>{birthYear}</span>
-                    </li>
-                    <li className='list-group-item'>
-                        <span className='term'>Eye color:</span>
-                        <span className='term'>{eyeColor}</span>
-                    </li>
+                    {itemIfo}
                 </ul>
             </div>
         );
@@ -69,3 +81,21 @@ class PersonDetails extends Component {
 }
 
 export default PersonDetails;
+
+
+
+
+
+
+// <li className='list-group-item'>
+//     <span className='term'>Gender:</span>
+//     <span className='term'>{gender}</span>
+// </li>
+// <li className='list-group-item'>
+//     <span className='term'>Berth Day:</span>
+//     <span className='term'>{birthYear}</span>
+// </li>
+// <li className='list-group-item'>
+//     <span className='term'>Eye color:</span>
+//     <span className='term'>{eyeColor}</span>
+// </li>

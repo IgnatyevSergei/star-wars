@@ -27,7 +27,9 @@ class PeoplePage extends Component {
                     renderList={(item)=> `${item.name}` }/>
                 </div>
                 <div className='col-md-6'>
-                    <PersonDetalis selectedItem={this.state.personId}/>
+                    <PersonDetalis selectedItem={this.state.personId}
+                                   getData={this.services.getPerson}
+                                   getImage={this.services.getPersonImage} />
                 </div>
             </div>
         );

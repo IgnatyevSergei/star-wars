@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PersonDetalis from "../person-detalis";
+import ItemDetails from "../person-detalis";
 import ItemList from "../item-list";
 import ServicesApi from "../../services-api";
 
@@ -27,7 +27,7 @@ class PeoplePage extends Component {
                     renderList={(item)=> `${item.name}` }/>
                 </div>
                 <div className='col-md-6'>
-                    <PersonDetalis selectedItem={this.state.personId}
+                    <ItemDetails selectedItem={this.state.personId}
                                    getData={this.services.getPerson}
                                    getImage={this.services.getPersonImage} />
                 </div>

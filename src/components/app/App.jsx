@@ -1,10 +1,9 @@
 import React from 'react'
 import Header from "../header";
-import HeroesBlock from '../heroes-block';
 import RandomPlanetBlock from "../random-planet-block";
 import ItemList from "../item-list";
 import PeoplePage from "../people-page";
-import PersonDetalis from "../person-detalis/Person-detalis";
+import ItemDetails from "../person-detalis";
 import ServicesApi from "../../services-api";
 
 
@@ -35,6 +34,11 @@ class App extends React.Component {
                                   getData={this.services.getAllPlanets}
                                   renderList={(item)=> <span>{item.diameter}</span> }/>
                     </div>
+                    <div className='col-md-6'>
+                        <ItemDetails selectedItem={this.state.personId}
+                                       getData={this.services.getPlanet}
+                                       getImage={this.services.getPlanetImage} />
+                    </div>
                     <div className='col-md-6'></div>
                 </div>
                     <br/>
@@ -43,6 +47,11 @@ class App extends React.Component {
                         <ItemList getPersonId={this.getPersonId}
                                   getData={this.services.getAllStarships}
                                   renderList={(item)=> <span>{item.model}</span>}/>
+                    </div>
+                    <div className='col-md-6'>
+                        <ItemDetails selectedItem={this.state.personId}
+                                       getData={this.services.getStarships}
+                                       getImage={this.services.getStarshipsImage} />
                     </div>
                     <div className='col-md-6'></div>
                 </div>

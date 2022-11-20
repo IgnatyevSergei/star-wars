@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './person-detalis.css'
 
 
-class PersonDetails extends Component {
+class ItemDetails extends Component {
 
 
     state ={
@@ -11,6 +11,8 @@ class PersonDetails extends Component {
     }
 
     componentDidMount() {
+
+
 
     }
 
@@ -36,7 +38,8 @@ class PersonDetails extends Component {
 
     renderItem (item) {
        return  Object.entries(item).map(([title, description]) =>{
-           return (<li className='list-group-item' key={item.id}>
+           if (title === 'id' || title === 'name') {return }
+           return (<li className='list-group-item' key={title.id}>
                         <span className='term'>{title}:</span>
                        <span className='term'>{description}</span>
                      </li>
@@ -80,7 +83,7 @@ class PersonDetails extends Component {
     }
 }
 
-export default PersonDetails;
+export default ItemDetails;
 
 
 

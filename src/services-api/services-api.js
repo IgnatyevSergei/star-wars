@@ -82,9 +82,9 @@ class ServicesApi {
         return {
             id: this._extract(person.url),
             name: person.name,
-            gender: person.gender,
-            birthYear: person.birth_year,
-            eyeColor: person.eye_color,
+            Gender: person.gender,
+            'Birth Year': person.birth_year,
+            'Eye color': person.eye_color,
 
 
         }
@@ -96,8 +96,6 @@ class ServicesApi {
             name: starship.name,
             model: starship.model,
             length: starship.length,
-            crew: starship.crew,
-            passengers: starship.passengers,
             costInCredits: starship.cost_in_credits,
 
 

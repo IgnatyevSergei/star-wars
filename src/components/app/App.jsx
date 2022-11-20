@@ -32,7 +32,7 @@ class App extends React.Component {
                     <div className='col-md-6'>
                         <ItemList getPersonId={this.getPersonId}
                                   getData={this.services.getAllPlanets}
-                                  renderList={(item)=> <span>{item.diameter}</span> }/>
+                                  renderList={(item)=> <span>{item.Diameter}</span> }/>
                     </div>
                     <div className='col-md-6'>
                         <ItemDetails selectedItem={this.state.personId}
@@ -46,7 +46,7 @@ class App extends React.Component {
                     <div className='col-md-6'>
                         <ItemList getPersonId={this.getPersonId}
                                   getData={this.services.getAllStarships}
-                                  renderList={(item)=> <span>{item.model}</span>}/>
+                                  renderList={(item)=> <span>{item.Model}</span>}/>
                     </div>
                     <div className='col-md-6'>
                         <ItemDetails selectedItem={this.state.personId}

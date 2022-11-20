@@ -66,7 +66,7 @@ class RandomPlanetBlock extends React.Component {
 };
 
 const RandomPlanet = ({planet}) =>{
-    const {name, population, diameter, rotationPeriod, id } = planet
+    const {name, Population, Diameter, Rotation_Period, id } = planet
 
     return(
         <div className='random-planet-block'>
@@ -76,15 +76,15 @@ const RandomPlanet = ({planet}) =>{
             <ul className='list-group list-group-flush detail'>
                 <li className='list-group-item'>
                     <span className='term'>Population:</span>
-                    <span className='term'>{population}</span>
+                    <span className='term'>{Population}</span>
                 </li>
                 <li className='list-group-item'>
                     <span className='term'>Rotation Period:</span>
-                    <span className='term'>{rotationPeriod}</span>
+                    <span className='term'>{Rotation_Period}</span>
                 </li>
                 <li className='list-group-item'>
                     <span className='term'>Diameter:</span>
-                    <span className='term'>{diameter}</span>
+                    <span className='term'>{Diameter}</span>
                 </li>
             </ul>
 

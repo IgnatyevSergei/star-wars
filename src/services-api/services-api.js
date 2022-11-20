@@ -71,9 +71,9 @@ class ServicesApi {
         return {
             id: this._extract(response.url),
             name: response.name,
-            population: response.population,
-            rotationPeriod: response.rotation_period,
-            diameter: response.diameter
+            Population: response.population,
+            'Rotation_Period': response.rotation_period,
+            Diameter: response.diameter
 
         }
     }
@@ -94,9 +94,9 @@ class ServicesApi {
         return {
             id: this._extract(starship.url),
             name: starship.name,
-            model: starship.model,
-            length: starship.length,
-            costInCredits: starship.cost_in_credits,
+            Model: starship.model,
+            Length: starship.length,
+            'Cost in credits': starship.cost_in_credits,
 
 
 

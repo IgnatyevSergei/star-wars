@@ -1,25 +1,11 @@
 import React, {Component} from 'react';
-import Spinner from "../spinner";
-import Error from "../error";
+import {WithDataHoc} from "../hoc";
+
+
 
 class ItemList extends Component {
 
-    state = {
-        itemList: null,
 
-    }
-
-    componentDidMount() {
-        const {getData} = this.props
-
-        getData()
-            .then(itemList => {
-                this.setState({
-                    itemList
-                })
-            })
-            .catch((e) => console.log(e))
-    }
 
     renderItems(itemList) {
         return itemList.map((item) => {
@@ -39,15 +25,7 @@ class ItemList extends Component {
 
     render() {
 
-        const {itemList} = this.state
-
-        if (!itemList) {
-            return <Spinner/>
-        }
-
-
-
-        const items = this.renderItems(itemList)
+       const items = this.renderItems(this.props.data)
 
         return (
             <div>
@@ -60,5 +38,5 @@ class ItemList extends Component {
     }
 }
 
-export default ItemList;
+export default WithDataHoc(ItemList);
 

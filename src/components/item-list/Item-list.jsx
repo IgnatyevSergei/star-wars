@@ -1,19 +1,16 @@
 import React, {Component} from 'react';
-import Spiner from "../spiner";
+import Spinner from "../spinner";
 import Error from "../error";
 
 class ItemList extends Component {
 
-
-
     state = {
         itemList: null,
-        hasError: false
+
     }
 
     componentDidMount() {
         const {getData} = this.props
-
 
         getData()
             .then(itemList => {
@@ -21,46 +18,47 @@ class ItemList extends Component {
                     itemList
                 })
             })
+            .catch((e) => console.log(e))
     }
 
     renderItems(itemList) {
         return itemList.map((item) => {
-            const label = this.props.renderList(item)
-            return (<li onClick={()=>{
-            this.props.getPersonId(item.id)
-        }} className='list-group-item' key={item.id}>
-            {label}
-        </li>)})
+            const label = this.props.children(item)
+            return (<li className='list-group-item'
+                        key={item.id}
+                        onClick={() => this.props.onItemSelected(item.id)}
+            >
+                {label}
+            </li>)
+
+        })
     }
 
-    static getDerivedStateFromError(error) {
-        return {hasError: true}
-    }
 
-    componentDidCatch(error, errorInfo) {
 
-    }
 
     render() {
-        const {itemList, hasError} = this.state
+
+        const {itemList} = this.state
 
         if (!itemList) {
-            return <Spiner/>
+            return <Spinner/>
         }
 
-        if (hasError) {
-            return <Error/>
-        }
+
 
         const items = this.renderItems(itemList)
 
-
         return (
-            <ul className='list-group'>
-                {items}
-            </ul>
+            <div>
+                <ul className='list-group'>
+                    {items}
+                </ul>
+            </div>
+
         );
     }
 }
 
 export default ItemList;
+

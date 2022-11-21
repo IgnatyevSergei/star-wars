@@ -1,1 +1,1 @@
-export {default} from './Item-list'
+export {default} from './item-list'

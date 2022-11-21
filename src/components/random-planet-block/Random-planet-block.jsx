@@ -1,33 +1,39 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './random-planet-block.css'
 import servicesApi from "../../services-api";
-import Spiner from "../spiner";
+import Spinner from "../spinner";
 import Error from "../error";
 
-class RandomPlanetBlock extends React.Component {
+class RandomPlanetBlock extends Component {
     services = new servicesApi()
 
     state = {
         planet: {},
         isLoading: true,
-        hasError: false
+        hasError: false,
     }
 
     componentDidMount() {
         this.fetchPlanet()
-        // this.intervalId = setInterval(this.fetchPlanet, 5000)
+        // this.intervalId = setInterval(this.fetchPlanet, 150000)
     }
 
     componentWillUnmount() {
-        clearInterval(this.intervalId)
+       clearInterval(this.intervalId)
     }
-
 
     setPlanet = (planet) => {
         this.setState({
             planet,
             isLoading: false,
-            hasError:false
+            hasError: false,
+        })
+    }
+
+    setError = (error) => {
+        this.setState({
+            hasError: true,
+            isLoading: false
         })
     }
 
@@ -36,60 +42,54 @@ class RandomPlanetBlock extends React.Component {
         this.services.getPlanet(id)
             .then(this.setPlanet)
             .catch(this.setError)
-
-    }
-
-    setError = (error) => {
-        this.setState({
-            hasError:true,
-            isLoading:false
-        })
     }
 
     render() {
         const {planet, isLoading, hasError} = this.state
 
-        const spinner =isLoading && <Spiner/>
+        const spinner = isLoading && <Spinner/>
         const error = hasError && <Error/>
-        const content =!(isLoading || hasError) && <RandomPlanet planet = {planet}/>
+        const content = !(isLoading || hasError) && <RandomPlanet planet={planet}/>
 
         return (
             <div className='container'>
                 {spinner}
-                {error}
                 {content}
+                {error}
             </div>
-
         );
-
     }
+
+
 };
 
-const RandomPlanet = ({planet}) =>{
-    const {name, Population, Diameter, Rotation_Period, id } = planet
+const RandomPlanet = ({planet}) => {
+    const {name, population, diameter, rotationPeriod, id} = planet
 
-    return(
-        <div className='random-planet-block'>
-            <img className='img-thumbnail float-start size'
-                 src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt=""/>
+    return (
+        <div className=' random-planet-block'>
+            <img className='rounded float-start planet'
+                 src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+                 alt=""/>
             <h4>{name}</h4>
             <ul className='list-group list-group-flush detail'>
                 <li className='list-group-item'>
                     <span className='term'>Population:</span>
-                    <span className='term'>{Population}</span>
+                    <span>{population}</span>
                 </li>
                 <li className='list-group-item'>
                     <span className='term'>Rotation Period:</span>
-                    <span className='term'>{Rotation_Period}</span>
+                    <span>{rotationPeriod}</span>
                 </li>
                 <li className='list-group-item'>
                     <span className='term'>Diameter:</span>
-                    <span className='term'>{Diameter}</span>
+                    <span>{diameter}</span>
                 </li>
             </ul>
-
         </div>
     )
 }
 
+
 export default RandomPlanetBlock;
+

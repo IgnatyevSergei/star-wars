@@ -10,13 +10,14 @@
     border-radius: 5px;
 }
 
-.header ul li:hover{
-    background-color: lightblue;
+.header ul li:hover {
+    background-color: darkgrey;
 }
 
-.header a:hover{
+.header a:hover {
     text-decoration: none;
 }
+
 .header h3 a {
     color: white;
     text-decoration: none;

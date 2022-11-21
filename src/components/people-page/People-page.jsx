@@ -1,37 +1,51 @@
 import React, {Component} from 'react';
-import ItemDetails from "../person-detalis";
+import ItemDetails from "../item-details";
 import ItemList from "../item-list";
 import ServicesApi from "../../services-api";
+import Record from "../common/record";
+import ErrorBoundary from "../error-boundary";
+import Row from "../common/row";
 
 class PeoplePage extends Component {
+
     services = new ServicesApi()
 
-   state = {
-       personId: null
-   }
+    state = {
+        selectedItem: null
+    }
 
-   getPersonId =(id)=>{
-       this.setState({
-           personId: id
-       })
-   }
-
+    onItemSelected = (selectedItem) => {
+        this.setState({selectedItem})
+    }
 
 
     render() {
-          return (
-            <div className='row mb2'>
-                <div className='col-md-6'>
-                    <ItemList getPersonId={this.getPersonId}
-                    getData={this.services.getAllPeople}
-                    renderList={(item)=> `${item.name}` }/>
-                </div>
-                <div className='col-md-6'>
-                    <ItemDetails selectedItem={this.state.personId}
-                                   getData={this.services.getPerson}
-                                   getImage={this.services.getPersonImage} />
-                </div>
-            </div>
+        const {selectedItem} = this.state
+
+        const {getPerson, getPersonImage, getAllPeople} = this.services
+
+        const itemList = <ItemList
+            onItemSelected={this.onItemSelected}
+            getData={getAllPeople}>
+            {
+                (item) => <span>{item.name}</span>
+            }
+        </ItemList>
+
+        const itemDetails = <ItemDetails selectedItem={selectedItem}
+                                         getData={getPerson}
+                                         getImageUrl={getPersonImage}
+        >
+            <Record label={'Eye Color:'} value={'eyeColor'}/>
+            <Record label={'Gender:'} value={'gender'}/>
+            <Record label={'Birth Year:'} value={'birthYear'}/>
+
+        </ItemDetails>
+
+        return (
+            <ErrorBoundary>
+               <Row left={itemList} right={itemDetails}/>
+            </ErrorBoundary>
         );
     }
 }

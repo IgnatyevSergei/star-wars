@@ -1,1 +1,1 @@
-export {default} from './People-page'
+export {default} from './people-page'

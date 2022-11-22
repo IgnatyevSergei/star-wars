@@ -1,1 +1,1 @@
-export {default} from './random-planet-block'
+export {default} from './Random-planet-block'

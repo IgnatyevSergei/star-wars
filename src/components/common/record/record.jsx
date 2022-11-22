@@ -4,7 +4,7 @@ const Record = ({item, label, value}) => {
     return (
         <li className='list-group-item'>
             <span className='term'>{label}</span>
-            <span>{value}</span>
+            <span>{item[value]}</span>
         </li>
     );
 };

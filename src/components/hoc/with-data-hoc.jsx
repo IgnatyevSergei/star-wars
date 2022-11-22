@@ -23,17 +23,12 @@ export const WithDataHoc = (ViewComponent) => {
         render() {
             const {data} = this.state
 
-            if(!data) {
-                return  <Spinner/>
+            if (!data) {
+                return <Spinner/>
             }
 
             return <ViewComponent {...this.props} data={data}/>
-
         }
-
-
     }
-
-
 };
 

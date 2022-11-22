@@ -1,65 +1,26 @@
 import React, {Component} from 'react';
+import {WithDetailsInformationHoc} from "../hoc";
 
 
 class ItemDetails extends Component {
 
-
-
-    state = {
-        item: null,
-        image: null,
-    }
-
-    componentDidMount() {
-        this.updateItem()
-    }
-
-    componentDidUpdate(prevProps, prevState, s) {
-        if (this.props.selectedItem !== prevProps.selectedItem) {
-            this.updateItem()
-        }
-    }
-
-    updateItem() {
-        const {selectedItem, getData, getImageUrl} = this.props
-        if (!selectedItem) return
-        getData(selectedItem)
-            .then(item => {
-                this.setState({
-                    item,
-                    image: getImageUrl(item)
-                })
-            })
-    }
-
-
     render() {
-        const {item, image} = this.state
+        const {item} = this.props
+        return (<div>
+            <img className='rounded float-start planet'
+                 src={this.props.getImageUrl(item)}
+                 alt=""/>
+            <h4>{item.name}</h4>
+            <ul className='list-group list-group-flush detail'>
 
-        if (!item) {
-            return <span>Выберите элемент из списка!</span>
-        }
+                {React.Children.map(this.props.children, (child, index) => {
+                    return React.cloneElement(child,{item})
+                })}
 
-        const {name,birthYear, eyeColor, gender } = item
-
-
-        return (
-            <div>
-                <img className='rounded float-start planet'
-                     src={image}
-                     alt=""/>
-                <h4>{name}</h4>
-                <ul className='list-group list-group-flush detail'>
-                    {
-                      React.Children.map(this.props.children, (child, index)=>{
-                          return React.cloneElement(child, {item})
-                      })
-                    }
-
-                </ul>
-            </div>
-        );
+            </ul>
+        </div>);
     }
 }
 
-export default ItemDetails;
+export default WithDetailsInformationHoc(ItemDetails);
+

@@ -1,6 +1,5 @@
 import React, {Component, useState} from 'react'
 
-import ItemList from "../item-list";
 import PeoplePage from "../people-page";
 import ServicesApi from "../../services-api";
 import RandomPlanetBlock from "../random-planet-block";

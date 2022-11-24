@@ -1,14 +1,18 @@
 import React from 'react';
-
+import ErrorBoundary from "../../error-boundary";
 
 const Row = ({left, right}) => {
     return (
         <div className={'row mb2'}>
             <div className={'col-md-6'}>
-                {left}
+                <ErrorBoundary>
+                    {left}
+                </ErrorBoundary>
             </div>
             <div className={'col-md-6'}>
-                {right}
+                <ErrorBoundary>
+                    {right}
+                </ErrorBoundary>
             </div>
         </div>
     );

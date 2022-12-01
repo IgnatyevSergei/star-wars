@@ -10,9 +10,6 @@ class ErrorButton extends Component {
         if (this.state.error) {
             this.test.error = undefined
         }
-
-
-
         return (
             <div>
                 <button className={'btn btn-danger'}

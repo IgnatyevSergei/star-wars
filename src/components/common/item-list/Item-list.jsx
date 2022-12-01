@@ -1,20 +1,11 @@
-import React, {Component} from 'react';
-import {WithDataHoc} from "../../hoc";
-
+import React from 'react';
 
 const ItemList = (props) => {
-    const {children : renderLabel, onItemSelected, data } = props
+    const {children : renderLabel, onItemSelected, data} = props
 
-
-
-
-
-    // const items = renderItems(data)
-
-    const items = data.map((item)=>{
+    const items = data.map((item) => {
         const {id} = item;
         const label = renderLabel(item);
-
         return(
             <li className='list-group-item'
                 key={id}
@@ -33,7 +24,6 @@ const ItemList = (props) => {
         </div>
 
     );
-
 }
 
 export default ItemList;

@@ -1,78 +1,54 @@
-import ItemDetails from "../item-details/item-details";
-import Record from "../common/record";
 import React from "react";
-import {ServiceConsumer} from '../context'
+import ItemDetails from "../common/item-details";
+import {compose, WithDataHoc, WithItemDetailsDataHoc, WithServicesHoc} from "../hoc";
+
+const renderPersonDetails = () => ([
+    {label: 'Gender:', value: 'gender'},
+    {label: 'Birth Year:', value: 'birthYear'},
+    {label: 'Eye Color:', value: 'eyeColor'}
+])
+
+const renderPlanetDetails = () => ([
+    {label: 'Population:', value: 'population'},
+    {label: 'Rotation Period:', value: 'rotationPeriod'},
+    {label: 'Diameter:', value: 'diameter'}
+])
+
+const renderStarshipsDetails = () => ([
+    {label: 'Model:', value: 'model'},
+    {label: 'Length:', value: 'length'},
+    {label: 'Cost:', value: 'costInCredits'}
+])
+
+const mapPersonMethodToProps = (service) => ({
+    getData: service.getPerson,
+    getImageUrl: service.getPersonImage
+})
+
+const mapPlanetMethodToProps = (service) => ({
+    getData: service.getPlanet,
+    getImageUrl: service.getPlanetImage
+})
+
+const mapStarshipMethodToProps = (service) => ({
+    getData: service.getStarShip,
+    getImageUrl: service.getStarshipImage
+})
+
+export const PersonDetails = compose(
+    WithServicesHoc(mapPersonMethodToProps),
+    WithItemDetailsDataHoc(renderPersonDetails))(ItemDetails)
 
 
+export const PlanetDetails = compose(
+    WithServicesHoc(mapPlanetMethodToProps),
+    WithItemDetailsDataHoc(renderPlanetDetails))(ItemDetails)
 
-export const PersonDetails = ({selectedItem}) =>{
-    return (
-        <ServiceConsumer>
-            {
-                ({getPerson, getPersonImage})=>{
-                    return(
-                        <ItemDetails selectedItem={selectedItem}
-                                     getData={getPerson}
-                                     getImageUrl={getPersonImage}
-                        >
-                            <Record label={'Eye Color:'} value={'eyeColor'}/>
-                            <Record label={'Gender:'} value={'gender'}/>
-                            <Record label={'Birth Year:'} value={'birthYear'}/>
+export const StarshipDetails = compose(
+    WithServicesHoc(mapStarshipMethodToProps),
+    WithItemDetailsDataHoc(renderStarshipsDetails))(ItemDetails)
 
-                        </ItemDetails>
-                    )
-                }
-            }
-        </ServiceConsumer>
-    )
 
-}
-
-export const PlanetDetails = ({selectedItem}) =>{
-    return (
-        <ServiceConsumer>
-            {
-                ({getPlanet, getPlanetImage})=>{
-                    return(
-                        <ItemDetails selectedItem={selectedItem}
-                                     getData={getPlanet}
-                                     getImageUrl={getPlanetImage}
-                        >
-                            <Record label={'Population:'} value={'population'}/>
-                            <Record label={'Rotation Period:'} value={'rotationPeriod'}/>
-                            <Record label={'Diameter:'} value={'diameter'}/>
-
-                        </ItemDetails>
-                    )
-                }
-            }
-        </ServiceConsumer>
-    )
-
-}
-
-export const StarshipsDetails = ({selectedItem}) =>{
-    return (
-        <ServiceConsumer>
-            {
-                ({getStarShip, getStarshipImage})=>{
-                    return(
-                        <ItemDetails selectedItem={selectedItem}
-                                     getData={getStarShip}
-                                     getImageUrl={getStarshipImage}
-                        >
-                            <Record label={'Model:'} value={'model'}/>
-                            <Record label={'Length:'} value={'length'}/>
-                            <Record label={'Cost in credits:'} value={'costInCredits'}/>
-
-                        </ItemDetails>
-                    )
-                }
-            }
-        </ServiceConsumer>
-    )
-
-}
 
 
 

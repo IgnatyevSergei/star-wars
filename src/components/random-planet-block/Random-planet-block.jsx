@@ -13,9 +13,13 @@ class RandomPlanetBlock extends Component {
         hasError: false,
     }
 
+    static defaultProps = {
+        delay: 15000
+    }
+
     componentDidMount() {
         this.fetchPlanet()
-        // this.intervalId = setInterval(this.fetchPlanet, 150000)
+        this.intervalId = setInterval(this.fetchPlanet, this.props.delay)
     }
 
     componentWillUnmount() {
@@ -89,6 +93,7 @@ const RandomPlanet = ({planet}) => {
         </div>
     )
 }
+
 
 
 export default RandomPlanetBlock;

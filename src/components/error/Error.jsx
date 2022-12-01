@@ -1,5 +1,5 @@
 import React from "react";
-import icon from './error.png'
+import icon from './Error.png'
 import './error.css'
 
 const Error = () => {

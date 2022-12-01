@@ -1,96 +1,36 @@
 import React, {Component} from 'react'
-
-import PeoplePage from "../people-page";
 import ServicesApi from "../../services-api";
 import RandomPlanetBlock from "../random-planet-block";
 import Header from "../header";
 import ErrorBoundary from "../error-boundary";
-import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipsDetails, StarshipsList} from "../sw-components";
 import {ServiceProvider} from '../context'
-import Row from '../common/row'
+import {PeoplePage, PlanetsPage, StarshipsPage} from "../pages";
+import {BrowserRouter, Switch, Route, Router} from 'react-router-dom'
 
-class App extends Component {
+export class App extends Component {
 
     services = new ServicesApi()
-
-    state = {
-        selectedItem: null
-    }
-
-    onItemSelected = (selectedItem) => {
-        this.setState({selectedItem})
-    }
 
 
     render() {
         return (
             <ErrorBoundary>
                 <ServiceProvider value={this.services}>
-                    <Header/>
-                    <RandomPlanetBlock/>
-                    {/*<PeoplePage/>*/}
-                    <Row left={<PersonList onItemSelected={this.onItemSelected}/>}
-                         right={<PersonDetails selectedItem={this.state.selectedItem}/>}/>
-                    <Row
-                        left={<PlanetList onItemSelected={this.onItemSelected}/>}
-                        right={<PlanetDetails selectedItem={this.state.selectedItem}/>}/>
-
-                    <Row
-                        left={<StarshipsList onItemSelected={this.onItemSelected}/>}
-                        right={<StarshipsDetails selectedItem={this.state.selectedItem}/>}/>
-
+                    <BrowserRouter>
+                        <>
+                            <Header/>
+                            <RandomPlanetBlock/>
+                            <Switch>
+                                <Route path='/' exact render={() => <h2>Welcome</h2>}/>
+                                <Route path='/people/:id?' exact component={PeoplePage}/>
+                                <Route path='/planets' exact component={PlanetsPage}/>
+                                <Route path='/starships' exact component={StarshipsPage}/>
+                            </Switch>
+                        </>
+                    </BrowserRouter>
                 </ServiceProvider>
-            </ErrorBoundary>)
+            </ErrorBoundary>
+        )
     }
 
-}
-
-export default App
-
-{/*         <br/>*/
-}
-{/*<div className={'row mb2'}>*/
-}
-{/*    <div className={'col-md-6'}>*/
-}
-{/*        <ItemList*/
-}
-{/*            onItemSelected={this.onItemSelected}*/
-}
-{/*            getData={this.services.getAllPlanets}*/
-}
-{/*            renderList={(item) => <span>{item.diameter}</span>   }*/
-}
-
-{/*        />*/
-}
-{/*    </div>*/
-}
-{/*</div>*/
-}
-{/*<br/>*/
-}
-{/*<div className={'row mb2'}>*/
-}
-{/*    <div className={'col-md-6'}>*/
-}
-{/*        <ItemList*/
-}
-{/*            onItemSelected={this.onItemSelected}*/
-}
-{/*            getData={this.services.getAllStarShips}*/
-}
-{/*            renderList={(item) => `${item.model}` }*/
-}
-
-{/*        />*/
-}
-{/*    </div>*/
-}
-{/*</div>*/
-}
-
-{/*<PeoplePage/>*/
-}
-{/*<PeoplePage/>*/
 }

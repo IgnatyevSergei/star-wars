@@ -4,7 +4,7 @@ import Error from "../error";
 class ErrorBoundary extends Component {
 
     state = {
-         hasError: false
+        hasError: false
     }
 
     static getDerivedStateFromError(error) {
@@ -16,12 +16,10 @@ class ErrorBoundary extends Component {
     }
 
     render() {
-
         if (this.state.hasError) {
             return <Error/>
         }
-
-        return this.props.children
+        return this.props.children;
     }
 }
 

@@ -35,7 +35,7 @@ export const WithItemDetailsDataHoc = (renderChildren) => (ViewComponent) => {
 
         render() {
             const childrenConfiguration = renderChildren()
-            const details = childrenConfiguration.map((item) => <Record {...item}/>)
+            const details = childrenConfiguration.map((item) => <Record key={item.value} {...item}/>)
                const {item, image} = this.state
 
            return <ViewComponent {...this.props} item={item} image={image}>

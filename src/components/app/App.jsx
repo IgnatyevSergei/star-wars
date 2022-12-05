@@ -5,7 +5,7 @@ import Header from "../header";
 import ErrorBoundary from "../error-boundary";
 import {ServiceProvider} from '../context'
 import {PeoplePage, PlanetsPage, StarshipsPage} from "../pages";
-import {BrowserRouter, Switch, Route, Router} from 'react-router-dom'
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 export class App extends Component {
 
@@ -23,8 +23,8 @@ export class App extends Component {
                             <Switch>
                                 <Route path='/' exact render={() => <h2>Welcome</h2>}/>
                                 <Route path='/people/:id?' exact component={PeoplePage}/>
-                                <Route path='/planets' exact component={PlanetsPage}/>
-                                <Route path='/starships' exact component={StarshipsPage}/>
+                                <Route path='/planets/:id?' exact component={PlanetsPage}/>
+                                <Route path='/starships/:id?' exact component={StarshipsPage}/>
                             </Switch>
                         </>
                     </BrowserRouter>

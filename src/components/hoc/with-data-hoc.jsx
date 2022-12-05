@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import Spinner from "../spinner";
+import Error from "../error";
+import ErrorBoundary from "../error-boundary";
 
 export const WithDataHoc = (ViewComponent) => {
 
     return class extends Component {
 
 
-
         state = {
             data: null,
+            hasError: false,
+            isLoading: true
         }
 
 
@@ -17,19 +20,28 @@ export const WithDataHoc = (ViewComponent) => {
             const {getData} = this.props
             getData()
                 .then(data => {
-                    this.setState({data})
+                    this.setState({data, isLoading: false})
                 })
-                .catch((e) => console.log(e))
+                .catch((e) => this.setState({
+                    hasError: true,
+                    isLoading: false
+                }))
         }
 
         render() {
-            const {data} = this.state
+            const {data, hasError, isLoading} = this.state
 
-            if (!data) {
+            if (isLoading) {
                 return <Spinner/>
             }
 
-            return <ViewComponent  {...this.props} data={data}/>
+            if (hasError) {
+                return <Error/>
+            }
+
+            return <ErrorBoundary>
+                <ViewComponent  {...this.props} data={data}/>
+            </ErrorBoundary>
 
         }
     }

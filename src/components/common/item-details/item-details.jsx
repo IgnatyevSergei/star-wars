@@ -5,9 +5,7 @@ const  ItemDetails = (props) => {
         const {item, image} = props
 
 
-        if (!item) {
-            return <span>Выберите элемент из списка!</span>
-        }
+
         return (
             <div>
                 <img className='rounded float-start planet'

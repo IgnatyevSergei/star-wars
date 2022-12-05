@@ -3,8 +3,11 @@ import Row from "../common/row";
 import {PlanetDetails, PlanetList} from "../sw-components";
 import {withRouter} from "react-router-dom";
 
+
 const PlanetsPage = ({match, history}) => {
     const {id} = match.params
+
+
 
 
         return (

@@ -5,14 +5,14 @@ const Row = ({left, right}) => {
     return (
         <div className={'row mb2'}>
             <div className={'col-md-6'}>
-                <ErrorBoundary>
-                    {left}
-                </ErrorBoundary>
+
+                {left}
+
             </div>
             <div className={'col-md-6'}>
-                <ErrorBoundary>
-                    {right}
-                </ErrorBoundary>
+
+                {right}
+
             </div>
         </div>
     );
